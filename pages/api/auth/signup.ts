@@ -6,11 +6,15 @@ dbConnector();
 var CryptoJS = require("crypto-js");
 const signUp = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method == "POST") {
-    const { name, email } = req.body;
+    const { name, email, phone } = req.body;
     let user = new User({
       name,
       email,
-      password: CryptoJS.AES.encrypt(req.body.password, "secret123").toString(),
+      phone,
+      password: CryptoJS.AES.encrypt(
+        req.body.password,
+        process.env.SECRET_KEY
+      ).toString(),
     });
     user.save();
   }
