@@ -20,12 +20,14 @@ const addProduct = async (
             productcategory: req.body[i].productcategory,
             producttype: req.body[i].producttype,
             productsubcategory: req.body[i].productsubcategory,
-            productdescrition: req.body[i].productdescrition,
-            productprice: req.body[i].productprice,
+            productdescription: req.body[i].productdescription,
+            productoriginalprice: req.body[i].productoriginalprice,
+            productdiscountprice: req.body[i].productdiscountprice,
             productquantity: req.body[i].productquantity,
             productsizes: req.body[i].productsizes,
             productcolors: req.body[i].productcolors,
             productimages: req.body[i].productimages,
+            customerphotoreviews: req.body[i].customerphotoreviews,
           });
           product.save((error: any) => {
             if (error) {

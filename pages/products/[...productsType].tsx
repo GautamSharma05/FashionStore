@@ -9,7 +9,7 @@ const Products = ({ productByType }: any) => {
         <title>SharmaStore - India's Largest Fashion Store </title>
         <meta
           name="description"
-          content="India's Largest Fashion Store Sign Up Page"
+          content="SharmaStor - India's Largest Fashion Store Products By Category"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -23,7 +23,7 @@ const Products = ({ productByType }: any) => {
                   <div className="lg:w-1/5 md:w-1/2 p-4 w-full cursor-pointer shadow-lg m-6">
                     <a className="block relative  rounded overflow-hidden">
                       <img
-                        alt="ecommerce"
+                        alt="Product Image"
                         className="m-auto md:m-0 h-[30vh] md:h-[36vh] block"
                         src={item.productimages[0]}
                       />
@@ -36,8 +36,28 @@ const Products = ({ productByType }: any) => {
                       <h2 className="text-gray-900 title-font text-lg font-medium">
                         {item.productname}
                       </h2>
-                      <p className="mt-1 font-semibold">₹{item.productprice}</p>
-                      <p className="mt-1 font-semibold">{`Sizes:${item.productsizes}`}</p>
+                      <div className="flex space-x-2">
+                        <p className="my-1  text-sm font-semibold text-black">
+                          Rs.{item.productdiscountprice}
+                        </p>
+                        <span className="my-1 text-xs text-gray-500 line-through">
+                          Rs.{item.productoriginalprice}
+                        </span>
+                        <span className="my-1 text-xs text-orange-500">
+                          {`(${(
+                            ((item.productoriginalprice -
+                              item.productdiscountprice) /
+                              item.productoriginalprice) *
+                            100
+                          ).toFixed(1)}% OFF)`}
+                        </span>
+                      </div>
+                      <div className="flex space-x-1">
+                        <p className="my-1  text-black text-sm">Sizes:</p>
+                        <p className="mt-1 space-x-1 text-sm">
+                          {`${item.productsizes},`}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </Link>
