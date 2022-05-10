@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
             <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-              <Image width="54px" height="54px" src="/logo.svg" />
+              <Image priority width="54px" height="54px" src="/logo.svg" />
               <span className="ml-3 text-xl">SharmaStore</span>
             </a>
             <p className="mt-2 text-sm text-gray-500">
@@ -22,20 +22,30 @@ const Footer = () => {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">TopWear</a>
+                  <Link href={`/products/${"Men's"}/${"TopWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">TopWear</a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    BottomWear
-                  </a>
+                  <Link href={`/products/${"Men's"}/${"BottomWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      BottomWear
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    InnerWear & SleepWear
-                  </a>
+                  <Link href={`/products/${"Men's"}/${"InnerWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      InnerWear & SleepWear
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">FootWear</a>
+                  <Link href={`/products/${"Men's"}/${"FootWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      FootWear
+                    </a>
+                  </Link>
                 </li>
               </nav>
             </div>
@@ -45,20 +55,30 @@ const Footer = () => {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">TopWear</a>
+                  <Link href={`/products/${"Women's"}/${"TopWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">TopWear</a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    BottomWear
-                  </a>
+                  <Link href={`/products/${"Women's"}/${"BottomWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      BottomWear
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    InnerWear & SleepWear
-                  </a>
+                  <Link href={`/products/${"Women's"}/${"InnerWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      InnerWear & SleepWear
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">FootWear</a>
+                  <Link href={`/products/${"Women's"}/${"FootWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      FootWear
+                    </a>
+                  </Link>
                 </li>
               </nav>
             </div>
@@ -68,20 +88,30 @@ const Footer = () => {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">TopWear</a>
+                  <Link href={`/products/${"Boys"}/${"TopWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">TopWear</a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    BottomWear
-                  </a>
+                  <Link href={`/products/${"Boys"}/${"BottomWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      BottomWear
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    InnerWear & SleepWear
-                  </a>
+                  <Link href={`/products/${"Boys"}/${"InnerWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      InnerWear & SleepWear
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">FootWear</a>
+                  <Link href={`/products/${"Boys"}/${"FootWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      FootWear
+                    </a>
+                  </Link>
                 </li>
               </nav>
             </div>
@@ -91,20 +121,30 @@ const Footer = () => {
               </h2>
               <nav className="list-none mb-10">
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">TopWear</a>
+                  <Link href={`/products/${"Girls"}/${"TopWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">TopWear</a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    BottomWear
-                  </a>
+                  <Link href={`/products/${"Girls"}/${"BottomWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      BottomWear
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">
-                    InnerWear & SleepWear
-                  </a>
+                  <Link href={`/products/${"Girls"}/${"InnerWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      InnerWear & SleepWear
+                    </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-600 hover:text-gray-800">FootWear</a>
+                  <Link href={`/products/${"Girls"}/${"FootWear"}`}>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      FootWear
+                    </a>
+                  </Link>
                 </li>
               </nav>
             </div>

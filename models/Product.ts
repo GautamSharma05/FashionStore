@@ -4,6 +4,7 @@ const ProductSchema = new mongoose.Schema(
   {
     productname: { type: String, require: true },
     productcategory: { type: String, require: true },
+    producttype: { type: String, require: true },
     productsubcategory: { type: String, require: true },
     productdescrition: { type: String, require: true },
     productprice: { type: Number, require: true },
@@ -11,7 +12,6 @@ const ProductSchema = new mongoose.Schema(
     productsizes: {
       type: Array,
       index: {
-        unique: true,
         dropDups: true,
       },
       require: true,
@@ -19,7 +19,6 @@ const ProductSchema = new mongoose.Schema(
     productcolors: {
       type: Array,
       index: {
-        unique: true,
         dropDups: true,
       },
       require: true,
@@ -27,7 +26,6 @@ const ProductSchema = new mongoose.Schema(
     productimages: {
       type: Array,
       index: {
-        unique: true,
         dropDups: true,
       },
       require: true,

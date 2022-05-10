@@ -1,8 +1,64 @@
-import React from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
+import { signUp } from "./api/auth/auth.api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
+
 const SignUp = () => {
+  const router = useRouter();
+  const [name, setFullName] = useState("");
+  const [phone, setPhone] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleChange = (e: any) => {
+    if (e.target.name == "name") {
+      setFullName(e.target.value);
+    } else if (e.target.name == "phone") {
+      setPhone(e.target.value);
+    } else if (e.target.name == "email") {
+      setEmail(e.target.value);
+    } else if (e.target.name == "password") {
+      setPassword(e.target.value);
+    }
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = { name, phone, email, password };
+    signUp({ ...data, phone: `+91${data.phone}` })
+      .then((res) => {
+        console.log(res);
+        setFullName("");
+        setPhone("");
+        setEmail("");
+        setPassword("");
+        toast.success("You Have Created Account Successfully ", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => router.push("/login"), 2000);
+      })
+      .catch((error) => {
+        toast.error(error.message, {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
   return (
     <>
       <Head>
@@ -13,6 +69,17 @@ const SignUp = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className=" min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
@@ -28,6 +95,7 @@ const SignUp = () => {
                 layout="fill"
                 src="/logo.svg"
                 alt="Logo"
+                priority
               />
             </div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -45,7 +113,12 @@ const SignUp = () => {
               </Link>
             </p>
           </div>
-          <form className="mt-8 space-y-6" method="POST">
+
+          <form
+            onSubmit={handleSubmit}
+            className="mt-8 space-y-6"
+            method="POST"
+          >
             <input type="hidden" name="remember" value="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -53,13 +126,15 @@ const SignUp = () => {
                   Full Name
                 </label>
                 <input
+                  value={name}
+                  onChange={handleChange}
                   id="name"
                   name="name"
                   type="name"
                   autoComplete="name"
-                  required
                   className="my-4 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Full Name"
+                  required
                 />
               </div>
               <div>
@@ -67,9 +142,11 @@ const SignUp = () => {
                   Phone Number
                 </label>
                 <input
+                  value={phone}
+                  onChange={handleChange}
                   id="phone"
-                  name="phone"
                   type="phone"
+                  name="phone"
                   autoComplete="phone"
                   required
                   className="my-4 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -81,13 +158,15 @@ const SignUp = () => {
                   Email address
                 </label>
                 <input
+                  value={email}
+                  onChange={handleChange}
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
-                  required
                   className="my-4 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
+                  required
                 />
               </div>
               <div>
@@ -95,6 +174,8 @@ const SignUp = () => {
                   Password
                 </label>
                 <input
+                  value={password}
+                  onChange={handleChange}
                   id="password"
                   name="password"
                   type="password"

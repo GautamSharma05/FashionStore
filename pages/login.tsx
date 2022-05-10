@@ -1,9 +1,75 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Head from "next/head";
+import { signIn } from "./api/auth/auth.api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 const Login = () => {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleChange = (e: any) => {
+    if (e.target.name == "email") {
+      setEmail(e.target.value);
+    } else if (e.target.name == "password") {
+      setPassword(e.target.value);
+    }
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const data = { email, password };
+    signIn({ ...data })
+      .then((res) => {
+        setEmail("");
+        setPassword("");
+        toast.success("You are Successfully Login", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => router.push("/"), 2000);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message, {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  };
   return (
     <>
+      <Head>
+        <title>SharmaStore - India's Largest Fashion Store </title>
+        <meta
+          name="description"
+          content="India's Largest Fashion Store Login Page"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8">
           <div>
@@ -19,6 +85,7 @@ const Login = () => {
                 layout="fill"
                 src="/logo.svg"
                 alt="Logo"
+                priority
               />
             </div>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -27,16 +94,17 @@ const Login = () => {
             <p className="mt-2 text-center text-sm text-gray-600">
               Don't have an account?
               <Link href={"/signup"}>
-                <a
-                  href="#"
-                  className="font-medium ml-2 text-indigo-600 hover:text-indigo-500"
-                >
+                <a className="font-medium ml-2 text-indigo-600 hover:text-indigo-500">
                   Sign Up
                 </a>
               </Link>
             </p>
           </div>
-          <form className="mt-8 space-y-6" method="POST">
+          <form
+            onSubmit={handleSubmit}
+            className="mt-8 space-y-6"
+            method="POST"
+          >
             <input type="hidden" name="remember" value="true" />
             <div className="rounded-md  shadow-sm -space-y-px">
               <div>
@@ -44,6 +112,8 @@ const Login = () => {
                   Email address
                 </label>
                 <input
+                  value={email}
+                  onChange={handleChange}
                   id="email"
                   name="email"
                   type="email"
@@ -58,6 +128,8 @@ const Login = () => {
                   Password
                 </label>
                 <input
+                  value={password}
+                  onChange={handleChange}
                   id="password"
                   name="password"
                   type="password"
@@ -97,7 +169,7 @@ const Login = () => {
                     />
                   </svg>
                 </span>
-                Sign in
+                SIGN IN
               </button>
             </div>
           </form>
