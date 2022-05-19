@@ -463,7 +463,7 @@ const Product = ({ productById, similarProducts }: any) => {
           <span className="my-5 font-semibold text-black text-2xl">
             Similar Products
           </span>
-          <div className="flex">
+          <div className="flex overflow-x-auto">
             {similarProducts.product.map((item: any) => {
               return (
                 <Link passHref key={item._id} href={`/products/${item._id}`}>
@@ -471,7 +471,7 @@ const Product = ({ productById, similarProducts }: any) => {
                     <a className="block relative  rounded overflow-hidden">
                       <img
                         alt="Product Image"
-                        className="m-auto md:m-0 h-[30vh] md:h-[36vh] block"
+                        className="m-auto  md:m-0 h-[30vh] md:h-[36vh] block"
                         src={item.productimages[0]}
                       />
                     </a>
@@ -484,13 +484,13 @@ const Product = ({ productById, similarProducts }: any) => {
                         {item.productname}
                       </h2>
                       <div className="flex space-x-2">
-                        <p className="my-1  text-sm font-semibold text-black">
+                        <p className="my-1 text-sm font-semibold text-black">
                           Rs.{item.productdiscountprice}
                         </p>
                         <span className="my-1 text-xs text-gray-500 line-through">
                           Rs.{item.productoriginalprice}
                         </span>
-                        <span className="my-1 text-xs text-orange-500">
+                        <span className="my-1 text-xs text-orange-500 ">
                           {`(${(
                             ((item.productoriginalprice -
                               item.productdiscountprice) /
