@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 const SignUp = () => {
   const router = useRouter();
   const [name, setFullName] = useState("");
-  const [phone, setPhone] = useState();
+  const [phone, setPhone] = useState<any>();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

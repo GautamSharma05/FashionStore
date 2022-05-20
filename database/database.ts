@@ -1,16 +1,13 @@
 import mongoose from "mongoose";
 
-const connection = {};
+const connection: any = {};
 
 const dbConnector = async () => {
   if (connection.isConnected) {
     return;
   }
 
-  const db = await mongoose.connect(process.env.MONGO_URI!, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  const db = await mongoose.connect(process.env.MONGO_URI!);
   connection.isConnected = db.connections[0].readyState;
 };
 
