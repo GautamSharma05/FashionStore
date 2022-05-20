@@ -17,7 +17,7 @@ const Product = ({ productById, similarProducts }: any) => {
   const [showCustomerPhotosModal, setShowCustomerPhotosModal] = useState(false);
   const checkServiceAbility = async (e: any) => {
     e.preventDefault();
-    let pins = await fetch("http://localhost:3000/api/pincode");
+    let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`);
     let pinJson = await pins.json();
     if (pinJson.includes(parseInt(pin))) {
       setService(true);
@@ -401,6 +401,7 @@ const Product = ({ productById, similarProducts }: any) => {
                   .map((customerImage: any) => {
                     return (
                       <img
+                        key={customerImage._id}
                         alt="Customer Review Image"
                         src={customerImage}
                         className="mt-3 w-20 h-20"
@@ -521,7 +522,7 @@ const Product = ({ productById, similarProducts }: any) => {
 export async function getStaticPaths() {
   const res = await getAllProducts();
 
-  const paths = res.data.message.map((currELe: any) => {
+  const paths = res.message.map((currELe: any) => {
     return {
       params: {
         product: currELe._id,
@@ -537,14 +538,14 @@ export async function getStaticProps(context: any) {
   const productId = context.params.product;
 
   const productById = await getProductById(productId);
-  const gender = productById.data.product.productcategory;
-  const productType = productById.data.product.producttype;
+  const gender = productById.product.productcategory;
+  const productType = productById.product.producttype;
   const similarProducts = await getProductByType(gender, productType);
 
   return {
     props: {
-      productById: productById.data,
-      similarProducts: similarProducts.data,
+      productById: productById,
+      similarProducts: similarProducts,
     },
   };
 }

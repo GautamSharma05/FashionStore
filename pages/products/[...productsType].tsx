@@ -72,7 +72,7 @@ const Products = ({ productByType }: any) => {
 export async function getStaticPaths() {
   const res = await getAllProducts();
 
-  const paths = res.data.message.map((currELe: any) => {
+  const paths = res.message.map((currELe: any) => {
     return {
       params: {
         productsType: [currELe.productcategory, currELe.producttype],
@@ -90,7 +90,7 @@ export async function getStaticProps(context: any) {
   const productType = context.params.productsType[1];
   const productByType = await getProductByType(gender, productType);
   return {
-    props: { productByType: productByType.data },
+    props: { productByType: productByType },
   };
 }
 
